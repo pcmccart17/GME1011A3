@@ -114,17 +114,35 @@ namespace GME1011A3
                 }
                 else //baddie survived, now attacks the hero
                 {
-                    int baddieDamage = baddies[indexOfEnemy].DealDamage();  //how much damage?
-                    Console.WriteLine("Enemy #" + (indexOfEnemy+1) + " deals " + baddieDamage + " damage!");
+                    Minion enemy = baddies[indexOfEnemy];
+                    int baddieDamage;
+
+                    if (rng.Next(3) == 0) //33% chance of Goblin using Bite or Skellie using Rattle
+                    {
+                        if (enemy is Goblin goblin)
+                        {
+                            Console.WriteLine("Goblin uses BITE!");
+                            baddieDamage = goblin.GoblinBite();
+                        }
+                        else if (enemy is Skellie skellie)
+                        {
+                            Console.WriteLine("Skellie uses RATTLE!");
+                            baddieDamage = skellie.SkellieRattle();
+                        }
+                        else
+                        {
+                            baddieDamage = enemy.DealDamage();
+                        }
+                    }
+                    else
+                    {
+                        baddieDamage = enemy.DealDamage();
+                    }
+
+                    Console.WriteLine("Enemy #" + (indexOfEnemy + 1) + " deals " + baddieDamage + " damage!");
+
                     hero.TakeDamage(baddieDamage); //hero takes damage
-
-
-
-
-                    //TODO: The baddie doesn't ever use their special attack - but they should. Change the above to 
-                    //have a 33% chance that the baddie uses their special, and 67% that they use their regular attack.
                     
-
 
 
                     //let's look in on our hero.
