@@ -38,7 +38,7 @@ namespace GME1011A3
 
             for (int i = 0; i < numBaddies; i++)
             {
-                int type = rng.Next(3);
+                int type = rng.Next(3); //used AI to help me here change up how the baddies are generated, now having 3 types of baddies. 
 
 
                 if (type == 0)
