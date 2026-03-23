@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using HeroInheritance;
+using System.Collections.Generic;
 
 namespace GME1011A3
 {
@@ -37,15 +38,23 @@ namespace GME1011A3
 
             for (int i = 0; i < numBaddies; i++)
             {
-                if (rng.Next(2) == 0)
+                int type = rng.Next(3);
+
+
+                if (type == 0)
                 {
                     baddies.Add(new Goblin(rng.Next(30, 35), rng.Next(1, 5), rng.Next(1, 10)));
 
                 }
 
-                else
+                else if (type == 1)
                 {
                     baddies.Add(new Skellie(rng.Next(25, 31), 0 ));
+                }
+
+                else
+                {
+                    baddies.Add(new Dragon(rng.Next(28, 36), rng.Next(0, 3)));
                 }
 
                 //each baddie now has a 50% chance of being either a goblin or skellie, skellies also have a random health amount between 25 and 30 with 0 armour
@@ -129,6 +138,11 @@ namespace GME1011A3
                             Console.WriteLine("Skellie uses RATTLE!");
                             baddieDamage = skellie.SkellieRattle();
                         }
+                        else if (enemy is Dragon dragon)
+                        {
+                            baddieDamage = dragon.Burn();
+                        }
+
                         else
                         {
                             baddieDamage = enemy.DealDamage();
@@ -143,7 +157,6 @@ namespace GME1011A3
 
                     hero.TakeDamage(baddieDamage); //hero takes damage
                     
-
 
                     //let's look in on our hero.
                     Console.WriteLine(hero.GetName() + " has " + hero.GetHealth() + " health remaining.");
