@@ -74,18 +74,31 @@ namespace GME1011A3
 
                 //hero deals damage first
                 Console.WriteLine(hero.GetName() + " is attacking enemy #" + (indexOfEnemy+1) + " of " + numBaddies + ". Eek, it's a " + baddies[indexOfEnemy].GetType().Name);
-                int heroDamage = hero.DealDamage();  //how much damage?
-                Console.WriteLine("Hero deals " + heroDamage + " heroic damage."); 
+
+                int heroDamage;
+
+                if (rng.Next(3) == 0) //hero has 33% chance of using special attack
+                {
+                    heroDamage = hero.Berserk();
+
+                    if (heroDamage == 0)
+                    {
+                        Console.WriteLine("Hero tried to use Berserk but has no strength! Using normal attack :(");
+                        heroDamage = hero.DealDamage();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Hero uses BERSERK! :D");
+                    }
+                }
+                else
+                {
+                    heroDamage = hero.DealDamage();
+                }
+
+                Console.WriteLine("Hero deals " + heroDamage + " damage.");
+
                 baddies[indexOfEnemy].TakeDamage(heroDamage); //baddie takes the damage
-
-
-
-
-                //TODO: The hero doesn't ever use their special attack - but they should. Change the above to 
-                //have a 33% chance that the hero uses their special, and 67% that they use their regular attack.
-                //If the hero doesn't have enough special power to use their special attack, they do their regular 
-                //attack instead - but make a note of it in the output. There's no way for the hero to get more special
-                //power points, but if you want to craft a way for that to happen, that's fine.
 
 
 
