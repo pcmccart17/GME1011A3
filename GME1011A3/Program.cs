@@ -30,21 +30,25 @@ namespace GME1011A3
             int numAliveBaddies = numBaddies;
 
 
-            //TODO: change this so that it can contain goblins and skellies! Just change the type of the list!!
+            //type of list is now changed to Minion list
             List<Minion> baddies = new List<Minion>();
 
 
 
             for (int i = 0; i < numBaddies; i++)
             {
+                if (rng.Next(2) == 0)
+                {
+                    baddies.Add(new Goblin(rng.Next(30, 35), rng.Next(1, 5), rng.Next(1, 10)));
 
+                }
 
-                //TODO: each baddie should have 50% chance of being a goblin, 50% chance of
-                //being a skellie. A skellie should have random health between 25 and 30, and 0 armour (remember
-                //skellie armour is 0 anyway)
-                baddies.Add(new Goblin(rng.Next(30, 35), rng.Next(1, 5), rng.Next(1, 10)));
-            
-            
+                else
+                {
+                    baddies.Add(new Skellie(rng.Next(25, 31), 0 ));
+                }
+
+                //each baddie now has a 50% chance of being either a goblin or skellie, skellies also have a random health amount between 25 and 30 with 0 armour
             }
 
             //this should work even after you make the changes above
